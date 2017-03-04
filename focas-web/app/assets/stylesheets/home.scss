@@ -1,3 +1,26 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+#title {
+    font-family: 'Amatic SC', cursive;
+    font-size: 60px;
+    color: #333;
+}
+
+#login {
+    background-color: white;
+    margin-top: 20px;
+    text-align: center;
+    border-width: 2px;
+    border-radius: 3px;
+}
+
+body {
+    background-color: #333;
+    background-image: image-url("bg1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;
+}
