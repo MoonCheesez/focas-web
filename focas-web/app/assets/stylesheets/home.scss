@@ -15,9 +15,14 @@
     -webkit-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
-    font-family: 'Amatic SC', cursive;
-    font-size: 100px;
-    color: grey;
+    width:100%;
+    text-align: center;
+
+    h1 {
+        font-family: 'Amatic SC', cursive;
+        font-size: 100px;
+        color: grey;
+    }
 }
 
 #login {
