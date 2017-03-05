@@ -62,11 +62,11 @@ start_tracking = ->
     if prevType != e.type
       switch (e.type)
         when "blur"
-          #send_message("Slacking off, motivate me to carry on.")
+          send_message("Slacking off, motivate me to carry on.")
           out_of_focus()
           break
         when "focus"
-          #send_message("Working hard, do not disturb.")
+          send_message("Working hard, do not disturb.")
           in_focus()
           break
 
