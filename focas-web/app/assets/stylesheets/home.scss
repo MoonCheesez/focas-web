@@ -3,6 +3,29 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
+@mixin transition($speed) {
+    transition: all $speed ease-in-out;
+    -moz-transition: all $speed ease-in-out;
+    -webkit-transition: all $speed ease-in-out;
+    -o-transition: all $speed ease-in-out;
+    -ms-transition: all $speed ease-in-out;
+}
+
+.blur {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.vertical-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
 #title {
     font-family: 'Amatic SC', cursive;
     font-size: 200px;
@@ -10,11 +33,7 @@
 }
 
 #quote {
-    transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -webkit-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    -ms-transition: all 1s ease-in-out;
+    @include transition(1s);
     width:100%;
     text-align: center;
 
@@ -32,18 +51,8 @@
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.vertical-center {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
 body {
     background-color: #333;
-    background-image: image-url("bg1.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: top;
 }
 
 #facebook-login, #quote {
@@ -51,28 +60,14 @@ body {
 }
 
 #background {
-    transition: all 1s ease-in-out;
-    -moz-transition: all 1s ease-in-out;
-    -webkit-transition: all 1s ease-in-out;
-    -o-transition: all 1s ease-in-out;
-    -ms-transition: all 1s ease-in-out;
+    @include transition(1s);
     background-color: #333;
     background-image: image-url("bg1.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: top;
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    z-index:-1;
-}
-
-.blur {
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(5px);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }

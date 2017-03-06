@@ -2,7 +2,39 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+facebook_button = "#facebook-login"
+
+window.fbAsyncInit = ->
+  FB.init({
+    appId      : '719174448253674',
+    xfbml      : true,
+    version    : 'v2.8'
+  })
+
+  FB.getLoginStatus((response) ->
+    if response.status == "connected"
+      display_quote()
+    else
+      $(facebook_button).show()
+  )
+
+PageScript = document.getElementsByTagName("script")[0]
+return if document.getElementById("FBScript")
+FBScript = document.createElement("script")
+FBScript.id = "FBScript"
+FBScript.async = true
+FBScript.src = "//connect.facebook.net/en_US/all.js"
+PageScript.parentNode.insertBefore(FBScript, PageScript)
+
+window.login = ->
+  r = (response) ->
+    if response.authResponse
+      display_quote()
+
+  FB.login(r, {scope: 'user_posts,publish_actions'})
+
 window.display_quote = ->
+  $(facebook_button).hide()
   $("#login").fadeOut(1000)
   $("#background").addClass("blur")
   $("#quote").fadeIn(1000)
@@ -16,47 +48,13 @@ window.in_focus = ->
   $("#background").addClass("blur")
   $("#quote").removeClass("blur")
 
-window.fbAsyncInit = ->
-  FB.init({
-    appId      : '719174448253674',
-    xfbml      : true,
-    version    : 'v2.8'
-  })
-
-  FB.getLoginStatus((response) ->
-    window.login_status = response.status
-    button_selector = "#facebook-login"
-    if window.login_status == "connected"
-      display_quote()
-      $(button_selector).hide()
-    else
-      $(button_selector).show()
-  )
-
-PageScript = document.getElementsByTagName("script")[0]
-return if document.getElementById("FBScript")
-FBScript = document.createElement("script")
-FBScript.id = "FBScript"
-FBScript.async = true
-FBScript.src = "//connect.facebook.net/en_US/all.js"
-PageScript.parentNode.insertBefore(FBScript, PageScript)
-
-window.login = ->
-  FB.login(((response) ->
-    if response.authResponse
-      window.login_status = "connected"
-      set_button_status(window.login_status)
-    else
-      console.log('User cancelled login or did not fully authorize.')
-    ), {scope: 'user_posts,publish_actions'})
-
 send_message = (m) ->
   FB.api('/me/feed', 'post', {message: m}, (response) ->
     return response
   )
 
 start_tracking = ->
-  $(window).on("blur focus", (e) ->
+  eventHandler = (e) ->
     prevType = $(this).data("prevType")
 
     if prevType != e.type
@@ -71,4 +69,5 @@ start_tracking = ->
           break
 
     $(this).data("prevType", e.type)
-  )
+
+  $(window).on("blur focus", eventHandler)
