@@ -34,7 +34,6 @@ window.login = ->
   FB.login(r, {scope: 'user_posts,publish_actions'})
 
 window.display_quote = ->
-  $(facebook_button).hide()
   $("#login").fadeOut(1000)
   $("#background").addClass("blur")
   $("#quote").fadeIn(1000)
